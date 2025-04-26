@@ -1,9 +1,197 @@
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="com.nevermind.client.controller.ChatController">
-    <TextArea fx:id="chatArea" editable="false" prefHeight="400"/>
-    <HBox spacing="10">
-        <TextField fx:id="messageField" HBox.hgrow="ALWAYS" promptText="Type a message..."/>
-        <Button text="Send" onAction="#sendMessage"/>
-    </HBox>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nevermind.client.controller.ChatController">
+      <MenuBar>
+          <Menu mnemonicParsing="false" text="Chat">
+              <MenuItem mnemonicParsing="false" text="Close" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="Settings">
+              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="Exit" />
+          </Menu>
+      </MenuBar>
+    <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+        <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="180.0"
+                    prefWidth="180.0">
+            <VBox>
+                <GridPane minWidth="180.0" style="-fx-background-color: #ddd;">
+                    <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"
+                                       prefWidth="140.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <Circle fill="LIME" radius="12.0" stroke="LIME" strokeType="INSIDE" GridPane.halignment="CENTER"
+                            GridPane.valignment="CENTER">
+                        <GridPane.margin>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                        </GridPane.margin>
+                        <effect>
+                            <InnerShadow/>
+                        </effect>
+                    </Circle>
+                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                        <Label text="User123">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets/>
+                            </VBox.margin>
+                        </Label>
+                        <Label text="Online">
+                            <font>
+                                <Font size="10.0"/>
+                            </font>
+                        </Label>
+                        <GridPane.margin>
+                            <Insets/>
+                        </GridPane.margin>
+                    </VBox>
+                </GridPane>
+                <GridPane minWidth="180.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0"
+                                           prefWidth="140.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <Circle fill="#dddddd" radius="12.0" stroke="#dddddd" strokeType="INSIDE"
+                            GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <GridPane.margin>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                        </GridPane.margin>
+                        <effect>
+                            <InnerShadow/>
+                        </effect>
+                    </Circle>
+                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                        <Label text="Anonymous47">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets/>
+                            </VBox.margin>
+                        </Label>
+                        <Label text="Last seen: 26/04/2025 11:35">
+                            <font>
+                                <Font size="10.0"/>
+                            </font>
+                        </Label>
+                        <GridPane.margin>
+                            <Insets/>
+                        </GridPane.margin>
+                    </VBox>
+                </GridPane>
+            </VBox>
+        </ScrollPane>
+        <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                <VBox spacing="15.0">
+                    <GridPane>
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="10.0"/>
+                            <ColumnConstraints minWidth="10.0"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" valignment="TOP" vgrow="ALWAYS"/>
+                            <RowConstraints/>
+                        </rowConstraints>
+                        <VBox alignment="TOP_RIGHT">
+                            <Label alignment="TOP_CENTER" text="26/04/2025">
+                                <font>
+                                    <Font size="10.0"/>
+                                </font>
+                            </Label>
+                            <Label alignment="TOP_LEFT" text="15:32">
+                                <font>
+                                    <Font size="10.0"/>
+                                </font>
+                            </Label>
+                            <GridPane.margin>
+                                <Insets bottom="10.0" right="5.0" top="10.0"/>
+                            </GridPane.margin>
+                        </VBox>
+                        <TextFlow style="-fx-background-radius: 3; -fx-background-color: #ddd;"
+                                  GridPane.columnIndex="1">
+                            <Label maxWidth="300.0"
+                                   text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat, leo a volutpat volutpat, risus felis fringilla nibh, vitae accumsan libero quam sed enim. Donec eget rutrum neque. Quisque id laoreet metus. Sed euismod ante lobortis gravida mollis. Mauris ac nisl in quam pharetra blandit. Morbi sit amet vulputate tortor. Integer non leo eu sem commodo imperdiet vitae volutpat enim.Aliquam nunc nulla, pharetra ut semper ut, rhoncus id sapien. Nullam in libero nunc. Nam varius egestas efficitur. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Donec fringilla gravida vulputate. Nullam blandit condimentum sapien, in elementum felis. Aliquam luctus sed turpis eu congue. Nam tincidunt hendrerit urna, et blandit lorem pellentesque nec. Nullam volutpat tellus in condimentum dapibus. Vestibulum eu ligula lectus. Vivamus non massa sed est faucibus pellentesque at sit amet metus. In vulputate vestibulum ullamcorper."
+                                   wrapText="true"/>
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            </padding>
+                        </TextFlow>
+                    </GridPane>
+                    <GridPane alignment="TOP_RIGHT" layoutX="20.0" layoutY="25.0">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="10.0"/>
+                            <ColumnConstraints minWidth="10.0"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" valignment="TOP" vgrow="ALWAYS"/>
+                            <RowConstraints/>
+                        </rowConstraints>
+                        <VBox GridPane.columnIndex="1">
+                            <Label alignment="TOP_CENTER" text="26/04/2025">
+                                <font>
+                                    <Font size="10.0"/>
+                                </font>
+                            </Label>
+                            <Label alignment="TOP_LEFT" text="15:32">
+                                <font>
+                                    <Font size="10.0"/>
+                                </font>
+                            </Label>
+                            <GridPane.margin>
+                                <Insets bottom="10.0" left="5.0" top="10.0"/>
+                            </GridPane.margin>
+                        </VBox>
+                        <TextFlow style="-fx-background-radius: 3; -fx-background-color: #ddd;">
+                            <Label maxWidth="300.0"
+                                   text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi placerat, leo a volutpat volutpat, risus felis fringilla nibh, vitae accumsan libero quam sed enim. Donec eget rutrum neque. Quisque id laoreet metus. Sed euismod ante lobortis gravida mollis. Mauris ac nisl in quam pharetra blandit. Morbi sit amet vulputate tortor. Integer non leo eu sem commodo imperdiet vitae volutpat enim.Aliquam nunc nulla, pharetra ut semper ut, rhoncus id sapien. Nullam in libero nunc. Nam varius egestas efficitur. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Donec fringilla gravida vulputate. Nullam blandit condimentum sapien, in elementum felis. Aliquam luctus sed turpis eu congue. Nam tincidunt hendrerit urna, et blandit lorem pellentesque nec. Nullam volutpat tellus in condimentum dapibus. Vestibulum eu ligula lectus. Vivamus non massa sed est faucibus pellentesque at sit amet metus. In vulputate vestibulum ullamcorper."
+                                   wrapText="true"/>
+                            <padding>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                            </padding>
+                        </TextFlow>
+                    </GridPane>
+                    <padding>
+                        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0"/>
+                    </padding>
+                </VBox>
+            </ScrollPane>
+            <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" spacing="15.0"
+                  SplitPane.resizableWithParent="false">
+                <TextField promptText="Type something..." HBox.hgrow="ALWAYS"/>
+                <Button mnemonicParsing="false" text="Send"/>
+                <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                </padding>
+            </HBox>
+        </SplitPane>
+    </SplitPane>
 </VBox>
