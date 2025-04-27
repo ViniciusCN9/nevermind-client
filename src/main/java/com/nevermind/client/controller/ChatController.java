@@ -3,7 +3,9 @@ package com.nevermind.client.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class ChatController {
     @FXML private TextArea chatArea;
     @FXML private TextField messageField;

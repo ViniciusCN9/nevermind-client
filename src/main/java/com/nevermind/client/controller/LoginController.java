@@ -1,13 +1,21 @@
 package com.nevermind.client.controller;
 
 import com.nevermind.client.manager.SceneManager;
+import com.nevermind.client.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@RequiredArgsConstructor
 public class LoginController {
+
+    private final AuthService authService;
+
     @FXML private TextField usernameInput;
     @FXML private PasswordField passwordInput;
     @FXML private Button loginButton;

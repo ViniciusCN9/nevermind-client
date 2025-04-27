@@ -21,8 +21,8 @@
       </Text>
       <VBox alignment="CENTER" spacing="15.0">
          <TextField fx:id="usernameInput" promptText="Username" />
-         <TextField fx:id="emailInput" promptText="Email" />
          <PasswordField fx:id="passwordInput" promptText="Password" />
+         <TextField fx:id="emailInput" promptText="Email" />
       </VBox>
       <VBox spacing="5.0">
          <Button fx:id="signupButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Signup" />
