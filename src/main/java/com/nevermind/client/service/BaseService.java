@@ -6,4 +6,7 @@ public class BaseService {
 
     @Value("${api.url}")
     protected String basePath;
+
+    @Value("${websocket.url}")
+    protected String websocketPath;
 }

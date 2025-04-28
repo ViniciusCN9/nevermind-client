@@ -1,13 +1,11 @@
 package com.nevermind.client.config.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class DefaultResponseError {
 
     private Integer statusCode;

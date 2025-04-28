@@ -1,6 +1,8 @@
 package com.nevermind.client.controller;
 
 import com.nevermind.client.manager.SceneManager;
+import com.nevermind.client.model.LoginRequest;
+import com.nevermind.client.model.LoginResponse;
 import com.nevermind.client.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
-public class LoginController {
+public class LoginController extends BaseController {
 
     private final AuthService authService;
 
@@ -28,14 +30,22 @@ public class LoginController {
     }
 
     private void doLogin() {
-        String user = usernameInput.getText();
-        String pass = passwordInput.getText();
-        // TODO: call AuthService to authenticate
-        boolean success = true;
-        if (success) {
+        String username = usernameInput.getText();
+        String password = passwordInput.getText();
+
+        try {
+            LoginRequest request = new LoginRequest(username, password);
+            LoginResponse response = authService.login(request);
             SceneManager.showChat();
-        } else {
-            // show error
+        } catch (Exception e) {
+            cleanFields();
+            showAlert(e.getMessage());
+            logError(e);
         }
+    }
+
+    private void cleanFields() {
+        usernameInput.clear();
+        passwordInput.clear();
     }
 }

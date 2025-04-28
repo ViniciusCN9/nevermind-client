@@ -9,15 +9,17 @@ import javafx.scene.control.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
+import java.util.Objects;
+
 @Controller
 @RequiredArgsConstructor
-public class SignupController {
+public class SignupController extends BaseController {
 
     private final AuthService authService;
 
     @FXML private TextField usernameInput;
-    @FXML private TextField emailInput;
     @FXML private PasswordField passwordInput;
+    @FXML private PasswordField confirmPasswordInput;
     @FXML private Button signupButton;
     @FXML private Hyperlink loginLink;
 
@@ -30,30 +32,27 @@ public class SignupController {
     private void doSignup() {
         String username = usernameInput.getText();
         String password = passwordInput.getText();
-        String email = emailInput.getText();
+        String confirmPassword = confirmPasswordInput.getText();
+
+        if (!Objects.equals(password, confirmPassword)) {
+            showAlert("Password does not match");
+            return;
+        }
 
         try {
-            SignupRequest request = new SignupRequest(username, password, email);
+            SignupRequest request = new SignupRequest(username, password);
             SignupResponse response = authService.signup(request);
             SceneManager.showLogin();
         } catch (Exception e) {
             cleanFields();
             showAlert(e.getMessage());
-            e.printStackTrace();
+            logError(e);
         }
     }
 
     private void cleanFields() {
         usernameInput.clear();
         passwordInput.clear();
-        emailInput.clear();
-    }
-
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("An error occurred");
-        alert.setContentText(message);
-        alert.showAndWait();
+        confirmPasswordInput.clear();
     }
 }
