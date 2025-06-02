@@ -3,6 +3,7 @@ package com.nevermind.client.config;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.nevermind.client.config.exception.GlobalResponseErrorHandler;
+import com.nevermind.client.model.UserModel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,10 @@ public class ClientConfiguration {
     @Getter
     @Setter
     private static String currentToken;
+
+    @Getter
+    @Setter
+    private static UserModel currentUser = null;
 
     @Bean
     public RestTemplate restTemplate() {

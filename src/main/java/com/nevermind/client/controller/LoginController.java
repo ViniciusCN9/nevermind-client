@@ -1,8 +1,10 @@
 package com.nevermind.client.controller;
 
+import com.nevermind.client.config.ClientConfiguration;
 import com.nevermind.client.manager.SceneManager;
 import com.nevermind.client.model.LoginRequest;
 import com.nevermind.client.model.LoginResponse;
+import com.nevermind.client.model.UserModel;
 import com.nevermind.client.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,7 +38,14 @@ public class LoginController extends BaseController {
         try {
             LoginRequest request = new LoginRequest(username, password);
             LoginResponse response = authService.login(request);
-            SceneManager.showChat();
+
+            UserModel currentUser = new UserModel();
+            currentUser.setUsername(request.getUsername());
+            currentUser.setToken(response.getToken());
+            currentUser.setExpiresIn(currentUser.getExpiresIn());
+            ClientConfiguration.setCurrentUser(currentUser);
+
+            SceneManager.showMain();
         } catch (Exception e) {
             cleanFields();
             showAlert(e.getMessage());

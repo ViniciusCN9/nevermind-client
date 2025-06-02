@@ -1,11 +1,11 @@
 package com.nevermind.client.service;
 
-import com.nevermind.client.AppApplication;
 import com.nevermind.client.config.ClientConfiguration;
 import com.nevermind.client.handler.ChatWebSocketHandler;
 import javafx.application.Platform;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketHttpHeaders;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
@@ -32,7 +32,7 @@ public class ChatService extends BaseService {
         if (session == null || !session.isOpen()) {
             throw new IllegalStateException("Connection is closed");
         }
-        session.sendMessage(new org.springframework.web.socket.TextMessage(message));
+        session.sendMessage(new TextMessage(message));
     }
 
     public void disconnect() {

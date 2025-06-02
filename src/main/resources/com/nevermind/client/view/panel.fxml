@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.geometry.Insets?>
+<ScrollPane fx:id="chatScrollPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.nevermind.client.controller.PanelController"
+            fitToWidth="true">
+    <VBox fx:id="messagesVBox">
+        <padding>
+            <Insets top="15" right="15" bottom="15" left="15"/>
+        </padding>
+    </VBox>
+</ScrollPane>
