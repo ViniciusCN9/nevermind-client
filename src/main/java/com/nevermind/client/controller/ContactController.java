@@ -14,9 +14,9 @@ import java.security.PublicKey;
 @RequiredArgsConstructor
 public class ContactController extends BaseController {
 
-    @FXML
-    private GridPane root;
+    @FXML private GridPane root;
     @FXML private Label nameLabel;
+    @FXML private Label notificationIcon;
 
     @Getter
     private String username;
@@ -53,5 +53,13 @@ public class ContactController extends BaseController {
 
     public void deselect() {
         root.setStyle("-fx-background-color: transparent;");
+    }
+
+    public void showNotification() {
+        notificationIcon.setVisible(true);
+    }
+
+    public void hideNotification() {
+        notificationIcon.setVisible(false);
     }
 }

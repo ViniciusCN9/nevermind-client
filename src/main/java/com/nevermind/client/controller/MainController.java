@@ -110,10 +110,15 @@ public class MainController extends BaseController {
                     String content = parts[2];
                     PanelController panel = chatPanels.get(username);
                     if (panel != null) {
-                        panel.addMessage(username, CryptUtil.decode(
-                                ClientConfiguration.getCurrentUser().getPrivateKey(),
-                                content)
-                        );
+                        String decrypted = CryptUtil.decode(ClientConfiguration.getCurrentUser().getPrivateKey(), content);
+                        panel.addMessage(username, decrypted);
+
+                        if (selectedContact == null || !selectedContact.getUsername().equals(username)) {
+                            contactControllers.stream()
+                                    .filter(c -> c.getUsername().equals(username))
+                                    .findFirst()
+                                    .ifPresent(ContactController::showNotification);
+                        }
                     }
                 }
             }
@@ -188,6 +193,7 @@ public class MainController extends BaseController {
                     chatPanels.get(selectedContact.getUsername()).getView().setVisible(false);
                 }
                 contactController.select();
+                contactController.hideNotification();
                 selectedContact = contactController;
                 chatPanels.get(username).getView().setVisible(true);
                 updateInputState();

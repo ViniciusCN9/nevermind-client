@@ -23,6 +23,30 @@
     -fx-background-color: #0e0e0e;
 }
 
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #353535;
+    -fx-background-radius: 4;
+}
+
+.scroll-bar .track {
+    -fx-background-color: #1e1e1e;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: #1e1e1e;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color: #57ff5d;
+}
+
 .text-field {
     -fx-background-color: #0e0e0e;
     -fx-text-fill: #ffffff;

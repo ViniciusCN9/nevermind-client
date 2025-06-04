@@ -21,11 +21,10 @@
         </Menu>
     </MenuBar>
     <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-        <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="180.0"
-                    prefWidth="180.0">
+        <ScrollPane hbarPolicy="NEVER" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="180.0" prefWidth="180.0">
             <VBox fx:id="contactsVBox"/>
         </ScrollPane>
-        <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+    <SplitPane dividerPositions="0.5" orientation="VERTICAL">
             <ScrollPane fitToWidth="true" hbarPolicy="NEVER" fitToHeight="true" VBox.vgrow="ALWAYS">
                 <StackPane fx:id="chatStackPane" maxWidth="Infinity" maxHeight="Infinity"/>
             </ScrollPane>
