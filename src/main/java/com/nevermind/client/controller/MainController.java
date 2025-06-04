@@ -4,6 +4,7 @@ import com.nevermind.client.config.ClientConfiguration;
 import com.nevermind.client.manager.SceneManager;
 import com.nevermind.client.service.AuthService;
 import com.nevermind.client.service.ChatService;
+import com.nevermind.client.util.CryptUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.security.PublicKey;
 import java.util.*;
 
 @Controller
@@ -30,12 +32,18 @@ public class MainController extends BaseController {
     private final Map<String, PanelController> chatPanels = new HashMap<>();
     private ContactController selectedContact;
 
-    @FXML private VBox contactsVBox;
-    @FXML private StackPane chatStackPane;
-    @FXML private MenuItem aboutMenuItem;
-    @FXML private MenuItem logoutMenuItem;
-    @FXML private TextField messageTextField;
-    @FXML private Button sendButton;
+    @FXML
+    private VBox contactsVBox;
+    @FXML
+    private StackPane chatStackPane;
+    @FXML
+    private MenuItem aboutMenuItem;
+    @FXML
+    private MenuItem logoutMenuItem;
+    @FXML
+    private TextField messageTextField;
+    @FXML
+    private Button sendButton;
 
     @FXML
     private void initialize() {
@@ -74,14 +82,16 @@ public class MainController extends BaseController {
             return;
         }
 
-        String recipient = selectedContact.getUsername();
+        String recipientUsername = selectedContact.getUsername();
+        PublicKey recipientPublicKey = selectedContact.getPublicKey();
+        String encryptedMessage = CryptUtil.encode(recipientPublicKey, text);
         try {
-            chatService.sendMessage("chat|" + recipient + "|" + text);
+            chatService.sendMessage("chat|" + recipientUsername + "|" + encryptedMessage);
         } catch (Exception e) {
             showAlert(e.getMessage());
         }
 
-        PanelController panel = chatPanels.get(recipient);
+        PanelController panel = chatPanels.get(recipientUsername);
         if (panel != null) panel.addMessage(ClientConfiguration.getCurrentUser().getUsername(), text);
 
         messageTextField.clear();
@@ -100,7 +110,10 @@ public class MainController extends BaseController {
                     String content = parts[2];
                     PanelController panel = chatPanels.get(username);
                     if (panel != null) {
-                        panel.addMessage(username, content);
+                        panel.addMessage(username, CryptUtil.decode(
+                                ClientConfiguration.getCurrentUser().getPrivateKey(),
+                                content)
+                        );
                     }
                 }
             }
@@ -126,13 +139,15 @@ public class MainController extends BaseController {
         String[] parts = message.split("\\|");
         if (parts.length != 3) return;
 
-        String username = parts[1];
+        String userInfo = parts[1];
+        String[] info = userInfo.split(":");
+        String username = info[0];
         String status = parts[2];
 
         if ("connected".equals(status)) {
             boolean exists = contactControllers.stream()
                     .anyMatch(c -> c.getUsername().equals(username));
-            if (!exists) addContact(username);
+            if (!exists) addContact(userInfo);
         } else if ("disconnected".equals(status)) {
             contactControllers.removeIf(c -> {
                 if (c.getUsername().equals(username)) {
@@ -147,12 +162,17 @@ public class MainController extends BaseController {
         }
     }
 
-    private void addContact(String username) {
+    private void addContact(String userInfo) {
         try {
+            String[] info = userInfo.split(":");
+            String username = info[0];
+            String publicKey = info[1];
+
             FXMLLoader contactLoader = new FXMLLoader(SceneManager.class.getResource("/com/nevermind/client/view/contact.fxml"));
             Node contactNode = contactLoader.load();
             ContactController contactController = contactLoader.getController();
             contactController.setUsername(username);
+            contactController.setPublicKey(CryptUtil.decodePublicKey(publicKey));
 
             FXMLLoader panelLoader = new FXMLLoader(SceneManager.class.getResource("/com/nevermind/client/view/panel.fxml"));
             panelLoader.load();
@@ -175,7 +195,6 @@ public class MainController extends BaseController {
 
             contactControllers.add(contactController);
             contactsVBox.getChildren().add(contactController.getView());
-
         } catch (IOException e) {
             showAlert(e.getMessage());
         }

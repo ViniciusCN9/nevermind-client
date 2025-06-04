@@ -2,6 +2,8 @@ package com.nevermind.client.service;
 
 import com.nevermind.client.config.ClientConfiguration;
 import com.nevermind.client.handler.ChatWebSocketHandler;
+import com.nevermind.client.model.UserModel;
+import com.nevermind.client.util.CryptUtil;
 import javafx.application.Platform;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,10 @@ public class ChatService extends BaseService {
     private Consumer<String> onMessageReceived;
 
     public void connect() throws Exception {
-        URI uri = new URI(websocketPath + "?token=" + ClientConfiguration.getCurrentToken());
+        UserModel currentUser = ClientConfiguration.getCurrentUser();
+        URI uri = new URI(websocketPath +
+                "?token=" + currentUser.getToken() +
+                "&public=" + CryptUtil.encodePublicKey(currentUser.getPublicKey()));
         session = client.execute(new ChatWebSocketHandler(onMessageReceived), headers, uri).get();
     }
 

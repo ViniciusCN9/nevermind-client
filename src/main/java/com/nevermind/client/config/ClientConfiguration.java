@@ -22,10 +22,6 @@ public class ClientConfiguration {
 
     @Getter
     @Setter
-    private static String currentToken;
-
-    @Getter
-    @Setter
     private static UserModel currentUser = null;
 
     @Bean
@@ -33,7 +29,8 @@ public class ClientConfiguration {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
         restTemplate.setErrorHandler(new GlobalResponseErrorHandler(objectMapper()));
-        if (currentToken != null) {
+        if (currentUser != null) {
+            String currentToken = currentUser.getToken();
             restTemplate.getInterceptors().add((request, body, execution) -> {
                 request.getHeaders().add(HttpHeaders.AUTHORIZATION, "Bearer " + currentToken);
                 return execution.execute(request, body);

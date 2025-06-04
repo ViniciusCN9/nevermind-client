@@ -5,7 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Controller;
+
+import java.security.PublicKey;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,14 +21,18 @@ public class ContactController extends BaseController {
     @Getter
     private String username;
 
+    @Getter
+    @Setter
+    private PublicKey publicKey;
+
     public void initialize() {
         root.setOnMouseEntered(e -> {
-            if (!root.getStyle().contains("#ddd")) {
-                root.setStyle("-fx-background-color: #ccc; -fx-cursor: hand;");
+            if (!root.getStyle().contains("#2B2B2B")) {
+                root.setStyle("-fx-background-color: #353535; -fx-cursor: hand;");
             }
         });
         root.setOnMouseExited(e -> {
-            if (!root.getStyle().contains("#ddd")) {
+            if (!root.getStyle().contains("#2B2B2B")) {
                 root.setStyle("-fx-background-color: transparent; -fx-cursor: default;");
             }
         });
@@ -41,7 +48,7 @@ public class ContactController extends BaseController {
     }
 
     public void select() {
-        root.setStyle("-fx-background-color: #ddd;");
+        root.setStyle("-fx-background-color: #2B2B2B;");
     }
 
     public void deselect() {

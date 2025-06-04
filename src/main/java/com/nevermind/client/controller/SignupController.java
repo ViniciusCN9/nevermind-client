@@ -6,6 +6,8 @@ import com.nevermind.client.model.SignupResponse;
 import com.nevermind.client.service.AuthService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
@@ -17,6 +19,7 @@ public class SignupController extends BaseController {
 
     private final AuthService authService;
 
+    @FXML private ImageView logo;
     @FXML private TextField usernameInput;
     @FXML private PasswordField passwordInput;
     @FXML private PasswordField confirmPasswordInput;
@@ -25,6 +28,8 @@ public class SignupController extends BaseController {
 
     @FXML
     private void initialize() {
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/nevermind/client/assets/fulllogo.png")));
+        logo.setImage(image);
         signupButton.setOnAction(e -> doSignup());
         loginLink.setOnAction(e -> SceneManager.showLogin());
     }

@@ -27,6 +27,11 @@ public class SceneManager {
             scene.getStylesheets().add(Objects.requireNonNull(SceneManager.class.getResource("/com/nevermind/client/css/style.css")).toExternalForm());
 
             primaryStage.setTitle("Nevermind - End-to-end encrypted chat");
+            primaryStage.getIcons().add(
+                    new javafx.scene.image.Image(Objects.requireNonNull(
+                            SceneManager.class.getResource("/com/nevermind/client/assets/onlylogo.png")
+                    ).toExternalForm())
+            );
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

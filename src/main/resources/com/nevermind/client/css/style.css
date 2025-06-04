@@ -1,0 +1,54 @@
+.root {
+    -fx-background-color: #151515;
+}
+
+.menu-bar {
+    -fx-background-color: #0e0e0e;
+}
+
+.context-menu {
+    -fx-background-color: #353535;
+}
+
+.scroll-pane {
+    -fx-background: #151515;
+    -fx-border-color: #353535;
+}
+
+.split-pane {
+    -fx-background-color: #151515;
+}
+
+.split-pane-divider {
+    -fx-background-color: #0e0e0e;
+}
+
+.text-field {
+    -fx-background-color: #0e0e0e;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #708c75;
+    -fx-border-color: #353535;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.button {
+    -fx-background-color: #353535;
+    -fx-text-fill: #57ff5d;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.button:disabled {
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: #708c75;
+}
+
+.label {
+    -fx-text-fill: #ffffff;
+}
+
+.circle {
+    -fx-fill: #57ff5d;
+    -fx-stroke: #57ff5d;
+}

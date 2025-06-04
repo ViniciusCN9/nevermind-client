@@ -45,13 +45,14 @@ public class PanelController extends BaseController {
         Label messageLabel = new Label(content);
         messageLabel.setWrapText(true);
         messageLabel.setMaxWidth(300);
-        messageLabel.setStyle("-fx-padding: 8;");
+        messageLabel.setStyle("-fx-padding: 8;" + (isOwnMessage ? "-fx-text-fill: #0e0e0e" : "-fx-text-fill: #ffffff"));
 
         TextFlow bubble = new TextFlow(messageLabel);
-        bubble.setStyle("-fx-background-color: " + (isOwnMessage ? "#acf2bd" : "#eeeeee") + ";" +
-                "-fx-background-radius: 8;" +
-                "-fx-padding: 4;" +
-                "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 2, 0, 1, 1);");
+        if (isOwnMessage) {
+            bubble.setStyle("-fx-background-color: #57ff5d;-fx-padding: 8 12 8 12;-fx-background-radius: 10;");
+        } else {
+            bubble.setStyle("-fx-background-color: #353535;-fx-padding: 8 12 8 12;-fx-background-radius: 10;");
+        }
 
         HBox bubbleBox = new HBox(bubble);
         bubbleBox.setAlignment(isOwnMessage ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
