@@ -1,0 +1,3 @@
+set NEVERMIND_API_URL=http://34.95.149.126:8080/v1/
+set NEVERMIND_WEBSOCKET_URL=ws://34.95.149.126:8080/chat
+java -jar client-0.0.1-SNAPSHOT.jar
